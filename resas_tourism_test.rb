@@ -26,8 +26,19 @@ result = http_client.get_content(URI.parse(URI.encode(url)), query, auth_header)
 
 data = JSON.load(result)
 
+ p  data
+
  data['result']['changes'].each do |d|
-  p d['countryName']
-end
+
+  v_list = []
+
+  d['data'].each do |cd|
+    v_list << cd['value']
+  end
+
+  puts d['countryName'] + ',' + v_list.join(',')
+
+
+ end
 
 
