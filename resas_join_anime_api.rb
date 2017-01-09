@@ -5,6 +5,8 @@ require 'shangrila'
 # bundle exe ruby resas_join_anime_api.rb {API_KEY}
 
 api_key = ARGV[0] #第1引数にAPIキーを指定
+anime_year = ARGV[1] # 2016〜2017
+anime_cours_id = ARGV[2] # 1〜4
 
 END_POINT = 'https://opendata.resas-portal.go.jp'
 API_PATH = 'api/v1-rc.1/population/sum/estimate'
@@ -14,10 +16,9 @@ auth_header = {
     'X-API-KEY' => api_key
 }
 
-# 2016年3期(6月-9月),4期(10月-12月)のアニメデータを取得
-anime_masters = Shangrila::Sora.new().get_map_key_id(2016, 3)
-c4 = Shangrila::Sora.new().get_map_key_id(2016, 4)
-anime_masters.update(c4)
+anime_masters = Shangrila::Sora.new().get_map_key_id(anime_year, anime_cours_id)
+#c4 = Shangrila::Sora.new().get_map_key_id(2016, 4)
+#anime_masters.update(c4)
 
 anime_masters.each do |anime_master|
 
